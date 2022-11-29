@@ -14,6 +14,4 @@ class Pokemon extends Model
         'type',
         'number'
     ];
-
-
 }

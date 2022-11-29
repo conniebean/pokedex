@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PokemonWrapper;
 use App\Models\Pokemon;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PokemonController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    private PokemonWrapper $repo;
+
+    public function __construct()
     {
-        //
+        $this->repo = new PokemonWrapper();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index()
+    {
+        return Inertia::render('Pokemon', [
+            'pokemon' => $this->repo->getPaginated()
+        ]);
+    }
+
     public function create()
     {
         //
