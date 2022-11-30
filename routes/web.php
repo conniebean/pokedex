@@ -30,7 +30,8 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('pokemon', PokemonController::class);
+Route::get('pokemon', [PokemonController::class, 'index']);
+Route::get('/pokemon/{id}', [PokemonController::class, 'show']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

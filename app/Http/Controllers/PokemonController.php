@@ -6,13 +6,16 @@ use App\Http\Resources\PokemonWrapper;
 use App\Models\Pokemon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use PokePHP\PokeApi;
 
 class PokemonController extends Controller
 {
+    private $api;
     private PokemonWrapper $repo;
 
     public function __construct()
     {
+        $this->api = new PokeApi();
         $this->repo = new PokemonWrapper();
     }
 
@@ -23,64 +26,10 @@ class PokemonController extends Controller
         ]);
     }
 
-    public function create()
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pokemon  $pokemon
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pokemon $pokemon)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pokemon  $pokemon
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pokemon $pokemon)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pokemon  $pokemon
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Pokemon $pokemon)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Pokemon  $pokemon
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Pokemon $pokemon)
-    {
-        //
+        Return Inertia::render('SinglePokemon', [
+            'singlePokemon' => $this->repo->singlePokemon($id)
+        ]);
     }
 }
