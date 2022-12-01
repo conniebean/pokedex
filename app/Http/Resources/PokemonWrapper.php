@@ -30,4 +30,9 @@ class PokemonWrapper
         $pokemon = $this->api->resourceList("pokemon/$id");
         return collect(json_decode($pokemon, true));
     }
+
+    public function getSprite($id)
+    {
+        return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png";
+    }
 }

@@ -29,7 +29,8 @@ class PokemonController extends Controller
     public function show($id)
     {
         Return Inertia::render('SinglePokemon', [
-            'singlePokemon' => $this->repo->singlePokemon($id)
+            'singlePokemon' => $this->repo->singlePokemon($id),
+            'sprite' => $this->repo->getSprite($id)
         ]);
     }
 }

@@ -1,11 +1,22 @@
 <template>
-    <div v-for="p in singlePokemon.forms">
-        {{p.name}}
+    <div>
+        <div>
+            {{ singlePokemon.name }}
+        </div>
+        <div>
+            <img :src="(sprite)" alt="">
+        </div>
+        <div v-for="move in singlePokemon.moves">
+            {{move.name}}
+        </div>
     </div>
 </template>
 
 <script setup>
-defineProps(['singlePokemon']);
+defineProps([
+    'singlePokemon',
+    'sprite'
+]);
 </script>
 
 <style scoped>
