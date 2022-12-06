@@ -35,4 +35,10 @@ class PokemonWrapper
     {
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png";
     }
+
+    public function getLocations($id)
+    {
+        $locations = $this->api->resourceList("pokemon/$id/encounters");
+        return collect(json_decode($locations, true));
+    }
 }
