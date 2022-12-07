@@ -12,13 +12,7 @@ class PokemonWrapper
     {
         $this->api = new PokeApi();
     }
-
-    public function getAll()
-    {
-        $pokemon = $this->api->resourceList('pokemon', 1152, 0);
-        return collect(json_decode($pokemon, true));
-    }
-
+    
     public function getPaginated()
     {
         $pokemon = $this->api->resourceList('pokemon', 20, 0);
