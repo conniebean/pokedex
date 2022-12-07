@@ -8,21 +8,29 @@
                     <img :src="(sprite)" alt="">
                 </div>
                 <h2 v-for="type in singlePokemon.types">
-                    Type: {{type.type.name}}
+                    Type: {{ type.type.name }}
                 </h2>
             </div>
         </div>
-        <div class="row">
+        <div class="row mx-2">
             <div class="col">
                 <h1 class="headline">Moves</h1>
-                <div v-for="move in singlePokemon.moves">
-                    <ul>{{ move.move.name }}</ul>
+                <div class="border border-black overflow-auto h-40">
+                    <div class="flex flex-col w-full text-center">
+                    <span v-for="move in singlePokemon.moves">
+                    {{ move.move.name }}
+                </span>
+                    </div>
                 </div>
             </div>
             <div class="col">
                 <h1 class="headline">Find Here!</h1>
-                <div v-for="area in location">
-                    <ul>{{ area.location_area.name }}</ul>
+                <div class="border border-black overflow-auto h-40">
+                    <div class="flex flex-col w-full text-center ">
+                    <span v-for="area in location">
+                        {{ area.location_area.name }}
+                    </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,13 +66,16 @@ defineProps([
     margin: 30px auto;
     width: 25%;
 }
-.col{
+
+.col {
     float: left;
     width: 50%;
 }
-.row:after{
+
+.row:after {
     content: "";
     display: table;
     clear: both;
+    max-width: 60%;
 }
 </style>
