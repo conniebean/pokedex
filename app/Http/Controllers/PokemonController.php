@@ -22,7 +22,7 @@ class PokemonController extends Controller
     public function index()
     {
         return Inertia::render('Pokemon', [
-            'pokemon' => $this->repo->getPaginated()
+            'pokemon' => $this->repo->getPaginated(),
         ]);
     }
 
