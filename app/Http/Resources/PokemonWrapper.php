@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Pokemon;
 use Illuminate\Support\Facades\Log;
 use PokePHP\PokeApi;
 
@@ -14,6 +15,11 @@ class PokemonWrapper
         $this->api = new PokeApi();
     }
 
+    public function getAll()
+    {
+        $pokemon = $this->api->resourceList('pokemon', 1150, 0);
+        return collect(json_decode($pokemon, true));
+    }
     public function getPaginated()
     {
         $pokemon = $this->api->resourceList('pokemon', 20, 0);
@@ -24,6 +30,18 @@ class PokemonWrapper
     {
         $pokemon = $this->api->resourceList("pokemon/$id", 20, 0);
         return collect(json_decode($pokemon, true));
+    }
+
+    public function getType($id)
+    {
+        $pokemon = $this->singlePokemon($id)->toArray();
+        return $pokemon['types'][0]['type']['name'];
+    }
+
+    public function getName($id)
+    {
+        $pokemon = $this->singlePokemon($id)->toArray();
+        return $pokemon['name'];
     }
 
     public function getSprite($id)

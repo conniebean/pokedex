@@ -10,8 +10,9 @@ class Pokemon extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'name',
+        'sprite',
         'type',
-        'number'
     ];
 }
