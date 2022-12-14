@@ -1,35 +1,30 @@
 <template>
     <div>
-
+        <div>
+            <input class="input flex inline-flex border border-black" placeholder="Find another Pokemon..." v-model="id"/>
+            <button class="border border-black button rounded-md shadow-lg" type="submit" @click="searchButtonPressed">
+                Search!
+            </button>
+        </div>
         <div class="centreDiv">
             <div class="image">
-                {{ singlePokemon.name }}
-                <div class="ml-3">
-                    <img :src="(sprite)" alt="">
+                <div v-for="pkmn in singlePokemon">
+                    {{pkmn.name}}
+                    <div class="ml-3">
+                        <img :src="(pkmn.sprite)" alt="">
+                    </div>
+                    Type: {{pkmn.type}}
                 </div>
-                <h2 v-for="type in singlePokemon.types">
-                    Type: {{ type.type.name }}
-                </h2>
             </div>
         </div>
         <div class="row mx-2">
             <div class="col">
-                <h1 class="headline">Moves</h1>
+                <h1 class="headline text-center">Moves</h1>
                 <div class="border border-black overflow-auto h-40">
                     <div class="flex flex-col w-full text-center">
-                    <span v-for="move in singlePokemon.moves">
-                    {{ move.move.name }}
-                </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <h1 class="headline">Find Here!</h1>
-                <div class="border border-black overflow-auto h-40">
-                    <div class="flex flex-col w-full text-center ">
-                    <span v-for="area in location">
-                        {{ area.location_area.name }}
-                    </span>
+                        <ul v-for="move in moves">
+                            <li>{{ move }}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -39,11 +34,19 @@
 </template>
 
 <script setup>
+import {ref} from "vue";
+
 defineProps([
     'singlePokemon',
-    'sprite',
-    'location',
+    'moves'
 ]);
+
+const id = ref('');
+
+function searchButtonPressed() {
+    window.location.href = `/pokemon/${id.value}`;
+}
+
 </script>
 
 <style scoped>
@@ -68,7 +71,6 @@ defineProps([
 }
 
 .col {
-    float: left;
     width: 50%;
 }
 
@@ -76,6 +78,11 @@ defineProps([
     content: "";
     display: table;
     clear: both;
-    max-width: 60%;
+    max-width: 30%;
+}
+
+.input {
+    margin: 40px;
+    align-content: center;
 }
 </style>

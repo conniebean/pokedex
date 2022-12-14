@@ -15,4 +15,8 @@ class Pokemon extends Model
         'sprite',
         'type',
     ];
+
+    protected $casts = [
+        'moves' => 'array'
+    ];
 }

@@ -2,36 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PokemonWrapper;
-use App\Models\Pokemon;
-use Illuminate\Http\Request;
+use App\Repositories\PokemonRepository;
 use Inertia\Inertia;
-use PokePHP\PokeApi;
 
 class PokemonController extends Controller
 {
-    private $api;
-    private PokemonWrapper $repo;
+    private PokemonRepository $repo;
 
     public function __construct()
     {
-        $this->api = new PokeApi();
-        $this->repo = new PokemonWrapper();
+        $this->repo = new PokemonRepository();
     }
 
     public function index()
     {
         return Inertia::render('Pokemon', [
-            'pokemon' => $this->repo->getPaginated(),
+            'pokemon' => $this->repo->getAll()
         ]);
     }
 
     public function show($id)
     {
         Return Inertia::render('SinglePokemon', [
-            'singlePokemon' => $this->repo->singlePokemon($id),
-            'sprite' => $this->repo->getSprite($id),
-            'location' => $this->repo->getLocations($id),
+            'singlePokemon' => $this->repo->findById($id),
+            'moves' => $this->repo->getMoves($id)
         ]);
     }
 }
